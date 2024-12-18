@@ -15,6 +15,6 @@ class Point extends Primitive {
 
   @override
   Map<String, dynamic> toJson() {
-    return { 'x': x, 'y': y, 'z': z, 'w': w };
+    return { 'name': name, 'x': x, 'y': y, 'z': z, 'w': w };
   }
 }

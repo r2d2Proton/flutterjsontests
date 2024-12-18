@@ -31,10 +31,19 @@ class Game {
     id = json['id'];
     name = json['name'];
     title = json['title'];
-    players = json['players'];
+    players = _convertPlayers(json['players']);
   }
 
   Map<String, dynamic> toJson() {
     return { 'id': id, 'name': name, 'title': title, 'players': players };
+  }
+
+  Map<String, Player> _convertPlayers(Map<String, dynamic> json) {
+    Map<String, Player> players = <String, Player>{};
+    json.forEach((k, v) {
+      players[id] = Player.fromJson(v);
+    });
+
+    return players;
   }
 }

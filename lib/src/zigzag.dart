@@ -20,11 +20,13 @@ class ZigZag extends Primitive {
   }
 
   factory ZigZag.fromJson(Map<String, dynamic> json) {
-    return ZigZag(points: json['points']);
+    List<Point> points = [];
+    json['points'].forEach((v) { points.add(Point.fromJson(v)); });
+    return ZigZag(points: points);
   }
 
   @override
   Map<String, dynamic> toJson() {
-    return { 'points': points };
+    return { 'name': name, 'points': points };
   }
 }
