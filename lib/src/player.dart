@@ -36,8 +36,32 @@ class Player {
   Map<String, dynamic> toJson() {
     return { 'id': id, 'name': name, 'primitives': primitives };
   }
+  
+  List<Primitive> _convertPrimitives(List<dynamic> json) => [
+    for (var v in json)
+      switch (v['name']) {
+        'primitive' => Primitive.fromJson(v),
+        'point' => Point.fromJson(v),
+        'line' => Line.fromJson(v),
+        'triangle' => Triangle.fromJson(v),
+        'zigzag' => ZigZag.fromJson(v),
+        var invalidValue => throw Exception('Invalid value: $invalidValue'),
+      }
+  ];
+  
+  List<Primitive> _convertPrimitivesAsList(List<dynamic> json) => [
+    for (var v in json)
+      ...switch (v['name']) {
+        'primitive' => [Primitive.fromJson(v), Point.fromJson(v)],
+        'point' => [Point.fromJson(v)],
+        'line' => [Line.fromJson(v)],
+        'triangle' => [Triangle.fromJson(v)],
+        'zigzag' => [ZigZag.fromJson(v)],
+        var invalidValue => throw Exception('Invalid value: $invalidValue'),
+      }
+  ];
 
-  List<Primitive> _convertPrimitives(List<dynamic> json) {
+  List<Primitive> _convertPrimitivesAsBreakStatement(List<dynamic> json) {
     List<Primitive> primitives = [];
     json.forEach((v) {
       String name = v['name'];

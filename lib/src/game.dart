@@ -31,7 +31,11 @@ class Game {
     id = json['id'];
     name = json['name'];
     title = json['title'];
-    players = _convertPlayers(json['players']);
+    //players = _convertPlayers(json['players']);
+    players = {
+      for (var MapEntry(:key, :value) in json['players'].entries)
+        key: Player.fromJson(value),
+    };
   }
 
   Map<String, dynamic> toJson() {
