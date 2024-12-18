@@ -41,7 +41,7 @@ class Game {
   Map<String, Player> _convertPlayers(Map<String, dynamic> json) {
     Map<String, Player> players = <String, Player>{};
     json.forEach((k, v) {
-      players[id] = Player.fromJson(v);
+      players[v['id']] = Player.fromJson(v);
     });
 
     return players;
